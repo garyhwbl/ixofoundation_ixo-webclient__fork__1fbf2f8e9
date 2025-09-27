@@ -24,7 +24,9 @@ const SetupActions: React.FC = () => {
   return (
     <FlexBox width={'100%'} $direction='column' $gap={15} $justifyContent='center'>
       <Typography variant='secondary' size='2xl'>
-        The following {validActions.length} actions get executed when the proposal passes.
+        {validActions.length === 0
+          ? 'No actions will be executed when the proposal passes.'
+          : `The following ${validActions.length} action${validActions.length === 1 ? '' : 's'} get executed when the proposal passes.`}
       </Typography>
 
       <SetupActionsForm actions={actions} setActions={(actions) => updateProposal({ ...proposal, actions })} />
@@ -33,7 +35,7 @@ const SetupActions: React.FC = () => {
         <Button variant='secondary' onClick={handleBack}>
           Back
         </Button>
-        <Button onClick={handleContinue} disabled={validActions.length === 0}>
+        <Button onClick={handleContinue}>
           Continue
         </Button>
       </FlexBox>
